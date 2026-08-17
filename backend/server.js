@@ -1,10 +1,13 @@
 const express=require("express");
 const app=express();
 
+app.use(express.json());
+
 const books = [ 
   { id: 1, title: "Clean Code", author: "Robert Martin" }, 
   { id: 2, title: "The Pragmatic Programmer", author: "Andy Hunt" }, 
 ]; 
+let students=[];
 
 //get/books 
 app.get("/books",(req,res)=>{
@@ -22,6 +25,26 @@ app.get("/books/:id",(req,res)=>{
         })
     }
 })
+
+//post
+app.post("/students",(req,res)=>{
+    const {name,department}=req.body;
+
+    if(!name || !department){
+        return res.status(400).json({
+            message:"Name and department required"
+        })
+    }
+    const student={
+        id:students.length+1,
+        name:name,
+        department:department
+    };
+    students.push(student);
+})
+
+
 app.listen(3000,() =>{
     console.log("server is running");
 })
+
