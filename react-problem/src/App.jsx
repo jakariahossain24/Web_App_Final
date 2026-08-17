@@ -4,6 +4,7 @@ import Problem_2 from './components/Problem_2';
 import Problem_3 from './components/Problem_3';
 import Problem_4 from './components/Problem_4';
 import Problem_5 from './components/Problem_5';
+import Problem_6 from './components/Problem_6';
 
 const App = () => {
   const [students, setStudents] = useState([
@@ -36,6 +37,8 @@ const App = () => {
       <Problem_4/>
       <div><hr /><br /></div>
       <Problem_5/>
+      <div><hr /><br /></div>
+      <Problem_6/>
     </>
   );
 };
