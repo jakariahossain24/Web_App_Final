@@ -57,7 +57,7 @@ app.get("/students/department", async (req,res)=>{
             "SELECT * FROM students WHERE department=?", [department]);
             if(rows.length===0){
                 return res.status(404).json({
-                    message:" "
+                    message:"client side error"
                 })
             }
             res.status(200).json();
@@ -70,3 +70,28 @@ app.get("/students/department", async (req,res)=>{
     }
 
 })
+
+//post
+app.post("/stduents", async(req,res)=>{
+    try{
+        const {name,email,department}=req.body;
+
+        if(!name || !email || !department){
+            return req.status(400).json({
+                message:""
+            })
+        }
+        const[results]=await pool.query(
+            "INSERT INTO students (name,email,department) VALUES(?,?,?)",[name,email,department]
+        );
+        res.status(201).json({
+            message:"student added successfully",
+            id:results.insertId
+        });
+    }catch(error){
+        console.error(err);
+        res.status(500).json({
+            message:"Failed to add student"
+        });
+    }
+});
