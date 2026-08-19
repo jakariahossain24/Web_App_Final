@@ -48,3 +48,25 @@ app.listen(3000,() =>{
     console.log("server is running");
 })
 
+//async+await 
+
+app.get("/students/department", async (req,res)=>{
+    try{
+        const {department}=req.params;
+        const [rows]=await db.query(
+            "SELECT * FROM students WHERE department=?", [department]);
+            if(rows.length===0){
+                return res.status(404).json({
+                    message:" "
+                })
+            }
+            res.status(200).json();
+
+    }catch(err){
+        console.error(err);
+        res.status(500).json({
+            message:"server error"
+        })
+    }
+
+})
