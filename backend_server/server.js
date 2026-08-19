@@ -60,7 +60,7 @@ app.get("/students/department", async (req,res)=>{
                     message:"client side error"
                 })
             }
-            res.status(200).json();
+            res.status(200).json(rows);
 
     }catch(err){
         console.error(err);
